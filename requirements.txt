@@ -1,0 +1,10 @@
+Flask
+Flask-RESTful
+SQLAlchemy
+Flask-SQLAlchemy
+Flask-Migrate
+requests
+Flask-Cors
+FastAPI
+Uvicorn
+pytest

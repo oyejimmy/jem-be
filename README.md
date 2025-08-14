@@ -1,107 +1,71 @@
-# FastAPI Backend
+# Jewelry Web Application
 
-A backend API built with **FastAPI** and **PostgreSQL**, including JWT-based authentication and database migrations using Alembic.
+## Overview
 
+This is a web application for managing and retrieving jewelry items. It provides a RESTful API to interact with jewelry data, allowing users to fetch information about various jewelry pieces.
 
-## 📌 Features
+## Project Structure
 
-- FastAPI framework
-- PostgreSQL database connection
-- SQLAlchemy ORM
-- Alembic migrations
-- JWT authentication
-- Modular folder structure
+```
+jewelry-web-app
+├── app
+│   ├── routes
+│   │   ├── user.py          # Routes related to user operations
+│   │   └── jewelry.py       # Routes for retrieving jewelry items
+│   ├── models
+│   │   └── jewelry.py       # Defines the Jewelry model
+│   └── __init__.py          # Initializes the application
+├── requirements.txt          # Lists project dependencies
+└── README.md                 # Project documentation
+```
 
+## Setup Instructions
 
-## 📂 Project Structure
+1. Clone the repository:
 
-app/
-├── main.py # Entry point
-├── routes/ # API route handlers
-├── models/ # SQLAlchemy models
-├── schemas/ # Pydantic schemas
-├── db/ # Database connection
-├── auth/ # Authentication logic
-└── init.py
-.env # Environment variables
+   ```
+   git clone <repository-url>
+   cd jewelry-web-app
+   ```
 
-## ⚙️ Installation & Setup
+2. Install the required dependencies:
 
-### 1️⃣ Clone the Repository
+   ```
+   pip install -r requirements.txt
+   ```
 
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+3. Run the application:
+   ```
+   python -m app
+   ```
 
-### 2️⃣ Create Virtual Environment
+## API Usage
 
-python -m venv venv
+### Get Jewelry Items
 
-Activate it:
+- **Endpoint**: `/api/jewelry`
+- **Method**: `GET`
+- **Description**: Retrieves a list of jewelry items from the database or a predefined list.
 
-# Windows
+### Example Response
 
-venv\Scripts\activate
-
-# Mac/Linux
-
-source venv/bin/activate
-
-### 3️⃣ Install Dependencies
-
-pip install -r requirements.txt
-
-If `requirements.txt` is not yet generated:
-pip install fastapi uvicorn[standard] psycopg2-binary sqlalchemy alembic python-dotenv python-jose passlib[bcrypt] pydantic[email]
-pip freeze > requirements.txt
-
-### 4️⃣ Environment Variables
-
-Create a `.env` file in the project root:
-
-DATABASE_URL=postgresql://username:password@localhost:5432/dbname
-SECRET_KEY=your_secret_key
-ALGORITHM=HS256
-ACCESS_TOKEN_EXPIRE_MINUTES=30
-
-### 5️⃣ Database Migrations
-
-Initialize Alembic:
-
-alembic init migrations
-
-Generate migration:
-
-alembic revision --autogenerate -m "Initial migration"
-
-Apply migration:
-
-alembic upgrade head
-
-### 6️⃣ Run the Application
-
-uvicorn app.main:app --reload
-
-## 🚀 API Endpoints
-
-### Health Check
-
-**GET** `/`
-{
-"message": "Hello, FastAPI!"
-}
-
-### Example User Endpoint
-
-**GET** `/users`
+```json
 [
-{
-"id": 1,
-"name": "Jamil"
-}
+  {
+    "id": 1,
+    "name": "Gold Ring",
+    "description": "A beautiful gold ring.",
+    "price": 199.99
+  },
+  {
+    "id": 2,
+    "name": "Silver Necklace",
+    "description": "An elegant silver necklace.",
+    "price": 149.99
+  }
 ]
+```
 
-## 🛠 Development Notes
+## Contributing
 
-- Make sure PostgreSQL is running locally or remotely before starting the app.
-- Always activate the virtual environment before running commands.
-- Run `pip freeze > requirements.txt` after adding new dependencies.
+Feel free to submit issues or pull requests for any improvements or features you would like to see in the application.
