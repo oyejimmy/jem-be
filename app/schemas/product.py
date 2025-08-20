@@ -1,41 +1,51 @@
 # filepath: app/schemas/product.py
-from pydantic import BaseModel, validator
-from typing import List, Optional
+from pydantic import BaseModel
+from typing import Optional, List
+from datetime import datetime
+
 
 class ProductBase(BaseModel):
     name: str
+    full_name: Optional[str] = None
     type: Optional[str] = None
-    full_name: str
     retail_price: float
-    offer_price: float
-    currency: str
+    offer_price: Optional[float] = None
+    currency: str = "PKR"
     description: Optional[str] = None
-    delivery_charges: Optional[float] = None
-    stock: Optional[int] = None
-    images: Optional[List[str]] = []
+    delivery_charges: float = 0.0
+    stock: int = 0
     status: str = "available"
-
-    @validator("type", pre=True, always=True)
-    def set_default_type(cls, v, values):
-        return v or values.get("name")
-
-    @validator("images", pre=True, always=True)
-    def convert_images_to_list(cls, v):
-        # If v is a string (from DB), convert to list
-        if isinstance(v, str):
-            return [v]
-        # If None, return empty list
-        if v is None:
-            return []
-        return v
+    images: Optional[str] = None
+    available: int = 0
+    sold: int = 0
+    category_id: int
 
 
 class ProductCreate(ProductBase):
     pass
 
 
+class ProductUpdate(BaseModel):
+    name: Optional[str] = None
+    full_name: Optional[str] = None
+    type: Optional[str] = None
+    retail_price: Optional[float] = None
+    offer_price: Optional[float] = None
+    currency: Optional[str] = None
+    description: Optional[str] = None
+    delivery_charges: Optional[float] = None
+    stock: Optional[int] = None
+    status: Optional[str] = None
+    images: Optional[str] = None
+    available: Optional[int] = None
+    sold: Optional[int] = None
+    category_id: Optional[int] = None
+
+
 class Product(ProductBase):
     id: int
+    unique_key: str
+    created_at: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True

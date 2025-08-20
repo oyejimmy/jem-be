@@ -1,10 +1,7 @@
-Flask
-Flask-RESTful
+fastapi
+uvicorn[standard]
 SQLAlchemy
-Flask-SQLAlchemy
-Flask-Migrate
-requests
-Flask-Cors
-FastAPI
-Uvicorn
+python-jose[cryptography]
+passlib
 pytest
+requests
