@@ -1,4 +1,4 @@
-# JEM Backend (FastAPI)
+# 💎 Jewellery Store Backend (FastAPI)
 
 ## Overview
 
@@ -93,31 +93,82 @@ requirements.txt
 
 ## Setup
 
-1) Install dependencies
+0) Prerequisites
+- Python **3.10+** recommended
+- Git installed
+- (Optional) Postman or cURL for testing
+
+1) Clone the repository
+```bash
+git clone https://github.com/oyejimmy/jem-be.git
+cd jem-be
 ```
+
+2) Create & activate a virtual environment
+```bash
+# Create
+python -m venv venv
+
+# Activate (Windows PowerShell)
+.\venv\Scripts\activate
+
+# Activate (Windows CMD)
+venv\Scripts\activate.bat
+
+# Activate (Linux / macOS)
+source venv/bin/activate
+```
+
+3) Install dependencies
+```
+python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-2) (Optional) Set DB URL, default is SQLite `./test.db`
+4) (Optional) Set DB URL, default is SQLite `./test.db`
 ```
 # PowerShell
 $env:DATABASE_URL="sqlite:///./test.db"
 ```
 
-3) Initialize database
+5) Initialize database
 ```
 python init_db.py
 ```
 
-4) Seed with sample data
+6) Seed with sample data
 ```
 python seed_data.py
 ```
 
-5) Run server
+7) Run server
 ```
 uvicorn app.main:app --reload
 ```
+
+### 🔁 Resetting your local DB (if needed)
+```bash
+# Stop the server, then:
+deactivate            # optional: exit venv if you want
+# Delete the SQLite file (be careful):
+# Windows PowerShell
+Remove-Item .\test.db -ErrorAction Ignore
+# Linux/macOS
+rm -f ./test.db
+
+# Recreate & reseed
+python init_db.py
+python seed_data.py
+```
+
+### 🧰 Common issues
+- **`uvicorn` not found** → Ensure venv is activated and `pip install -r requirements.txt` ran successfully.
+- **DB errors on first run** → Run `python init_db.py` (and optional `python seed_data.py`).
+- **Windows execution policy** (cannot run scripts) → Run PowerShell as Admin and execute:
+  ```powershell
+  Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+  ```
+
 
 ## API Endpoints
 
